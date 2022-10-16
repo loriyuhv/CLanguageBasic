@@ -133,9 +133,8 @@
 //	return 0;
 //}
 
-// 确定一个一维数组需要几个参数？
-// 一个是数组第一个元素的地址，一个是数组的长度
-
+/*确定一个一维数组需要几个参数？*/
+//一个是数组第一个元素的地址，一个是数组的长度
 //#include<stdio.h>
 //
 //void f(int* pArr, int len) {
@@ -227,3 +226,73 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//
+//void main() {
+//	// int a[10];
+//	// int len = 5;
+//	// int b[len];
+//
+//}
+
+//#include<stdio.h>
+//int main() {
+//	int a[5] = { 1, 2, 3, 4, 5 };
+//	// 20个字节的存储空间程序员无法手动编程释放它，
+//	// 它只能在本函数运行完毕时由系统自动释放
+//	printf("%d\n", a[2]);
+//	printf("%d\n", *a + 1);
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//void g(int* pArr, int len) {
+//	printf("%d\n", *(pArr + 2));
+//	pArr[2] = 88;
+//	*(pArr + 2) = 88;
+//}
+//
+//void f() {
+//	int a[5] = { 1, 2, 3, 4, 5 };
+//	g(a, 5);
+//	printf("%d\n", a[2]);
+//}
+//int main() {
+//	f();
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<malloc.h>
+
+struct Student {
+	int number;
+	float high;
+	char name;
+};
+
+int main() {
+	struct Student st;
+	/*malloc 是memory（内存）allocate（分配）的缩写*/
+	int i = 5; /* 分配了4个字节 静态分配 */
+	int* p = (int*)malloc(16);
+	float c = 8;
+	printf("%d\n", sizeof(float));
+	int j = 0;
+	for (j = 0; j < 4; j++) {
+		*(p + j) = j + 1;
+	}
+	for (j = 0; j < 4; j++) {
+		printf("%d\t", *(p + j));
+	}
+	//int* q = (struct Student*)malloc(sizeof(int) * 2);
+	//printf("%d\n", sizeof(st));
+	//printf("%d\n", sizeof(p));
+	//*p = 5; 
+	///* *p代表的就是一个int型变量，只不过*p这个整型变量的内存分配方式和11行的i变量的分配方式不同。 */
+	//free(p); // free(p) 表示把p所指向的内存给释放掉。
+	//		 // p本身的内存是静态的，不能由程序员手动释放，p本身的内存只能在p变量所在的函数运行终止时由系统自动释放。
+	//printf("同志们好！！！\n");
+	return 0;
+}
