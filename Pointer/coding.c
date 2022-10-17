@@ -263,36 +263,139 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<malloc.h>
+/*
+	malloc 是memory（内存）allocate（分配）的缩写
+*/
 
-struct Student {
-	int number;
-	float high;
-	char name;
-};
+//#include<stdio.h>
+//#include<malloc.h>
+//
+//int main() {	
+//	int i = 5; /* 分配了4个字节 静态分配 */
+//	int* p = (int*)malloc(16); /*12行，p 保存了动态分配的首地址*/ 
+//	printf("%d\n", sizeof(p) + sizeof(p + 1));
+//	/*
+//		1. 要使用malloc函数，必须添加malloc.h这个头文件
+//		2. malloc函数只有一个形参，并且形参是整形
+//		2. 4表示请求系统为本程序分配4个字节
+//		4. malloc函数只能返回第一个字节的地址
+//		5. 12行分配了8个字节，p变量占4个字节，p所指向的内存也占4个字节
+//		6. p本身所占的内存是静态分配的，p所指向的内存是动态分配的
+//		
+//		为什么使用（int*)?
+//		因为分配地址的时候只能返回第一个地址，但我能知道第一个变量
+//		占几个地址吗？所以用了强制类型转换。
+//		(char*)malloc(200); 200个变量
+//		(int*)malloc(200); 50个变量
+//		(double*)malloc(200); 25个变量
+//	*/
+//	* p = 5;
+//	/*
+//		*p代表的就是一个int型变量，只不过* p这个整型变量的内存分配方式和11行的i变量的分配方式不同。
+//	*/
+//	free(p);
+//	/* 
+//		1） free(p)表示p所指向的内存给释放掉
+//		2） p本身的内存是静态的，不能由程序员手动释放，
+//			p本身的内存只能在p变量所在的函数运行终止时由系统自动释放。
+//	
+//	*/
+//	printf("同志们好！！！\n");
+//	return 0;
+//}
 
-int main() {
-	struct Student st;
-	/*malloc 是memory（内存）allocate（分配）的缩写*/
-	int i = 5; /* 分配了4个字节 静态分配 */
-	int* p = (int*)malloc(16);
-	float c = 8;
-	printf("%d\n", sizeof(float));
-	int j = 0;
-	for (j = 0; j < 4; j++) {
-		*(p + j) = j + 1;
-	}
-	for (j = 0; j < 4; j++) {
-		printf("%d\t", *(p + j));
-	}
-	//int* q = (struct Student*)malloc(sizeof(int) * 2);
-	//printf("%d\n", sizeof(st));
-	//printf("%d\n", sizeof(p));
-	//*p = 5; 
-	///* *p代表的就是一个int型变量，只不过*p这个整型变量的内存分配方式和11行的i变量的分配方式不同。 */
-	//free(p); // free(p) 表示把p所指向的内存给释放掉。
-	//		 // p本身的内存是静态的，不能由程序员手动释放，p本身的内存只能在p变量所在的函数运行终止时由系统自动释放。
-	//printf("同志们好！！！\n");
-	return 0;
-}
+//#include<stdio.h>
+//#include<malloc.h>
+//
+//void f(int* pArr) {
+//	*pArr = 5;
+//	printf("%d\n", *pArr);
+//	free(pArr);	/* 把pArr所指向的内存释放掉 */
+//}
+//
+//int main() {
+//	int* p = (int*)malloc(sizeof(int));
+//	*p = 10;
+//	printf("%d\n", *p);
+//	f(p);
+//	printf("%d\n", *p);	/* 垃圾值 */
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<malloc.h>
+//
+//int main() {
+//	int a[5];
+//	/*  如果int占4个字节的话，则数组总共包含有20个字节，每四个字节被当做一个int变量来使用。*/
+//	int i, len;
+//	int* pArr;
+//	/* 动态构造一维数组 */
+//	printf("请输入要存放元素的个数：");
+//	scanf_s("%d", &len);
+//	pArr = (int*)malloc(sizeof(int) * len);
+//
+//	/* 对一维数组进行操作 如：对动态一维数组进行赋值 */
+//	for (i = 0; i < len; i++) {
+//		*(pArr + i) = i + 1;
+//	}
+//	
+//	/* 对一维数组进行输出 */
+//	printf("一维数组的内容是：");
+//	for (i = 0; i < len; i++) {
+//		// printf("%d\t", *(pArr + i));
+//		printf("%d\t", pArr[i]);
+//	}
+//	printf("\n");
+//
+//	realloc(pArr, 30);
+//	/*
+//	* 动态扩充缩小函数 把pArr指向的内存缩小到30
+//	* 如果数值比原来大，就是扩充，否则就是缩小
+//	*/
+//	/* 对扩充的一维数组进行操作 如：对动态一维数组进行赋值 */
+//	for (i = 0; i < 2; i++) {
+//		*(pArr + i + 5) = i + 5 + 1;
+//	}
+//	/* 对扩充的一维数组进行输出 */
+//	printf("一维数组的内容是：");
+//	for (i = 0; i < 7; i++) {
+//		// printf("%d\t", *(pArr + i));
+//		printf("%d\t", pArr[i]);
+//	}
+//	
+//	free(pArr);	/* 释放动态分配的数组所占用的内存 */
+//	return 0;
+//}
+
+//#include<stdio.h>
+
+//void f(int** q) {
+//	int i = 5;
+//	/* *q等价于p q和**q都不等价于p */
+//	*q = &i;	/* p = &i; */
+//}
+//int main() {
+//	int* p;
+//	f(&p);
+//	printf("%d\n", *p);	/* 本语句语法没有问题，但逻辑上有问题 */
+//	return 0;
+//}
+
+//#include<stdio.h>
+//#include<malloc.h>
+//
+//void f(int** q) {
+//	*q = (int*)malloc(sizeof(int));
+//	/* 等价于p = (int*)malloc(sizeof(int)); */
+//	// q = 5; // error
+//	// q = 5; // error
+//	**q = 5;
+//}
+//
+//int main() {
+//	int* p;
+//	f(&p);
+//	printf("%d\n", *p);
+//	return 0;
+//}
