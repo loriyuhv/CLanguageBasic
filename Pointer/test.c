@@ -42,3 +42,11 @@
 //	printf("p和q所指向的单元相隔%d个单元\n", q - p); // p-q没有实际意义
 //	return 0;
 //}
+
+
+#include<stdio.h>
+
+int main() {
+	printf("Hello world!!!");
+	return 0;
+}
